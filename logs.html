@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
+
+    <title>OCR SOAK TEST LOGS</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.0/examples/starter-template/starter-template.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">Altoros</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+    <!-- https://ocr-soak-test.s3.us-west-2.amazonaws.com/chainlink-node-sgwvv-6cdcf4f5f7-vvb2p/2021-09-28-12:36:34.log -->
+
+
+    <main role="main" class="container">
+      <div class="starter-template">
+        <div class="col-md-12 text-left pl-0 my-3"><a href="/" class="btn btn-primary">Go Back</a></div>
+    <table class="table table-bordered">
+        <thead>
+           <tr>
+               <th> Log File</th>
+               <th> Size</th>
+               <th> Action</th>
+           </tr>
+        </thead>
+        <tbody id="logs-body">
+            <tr id="wait">
+                <td class="text-red">Fetching logs...</td>
+            </td>
+        </tbody>
+    </table>         
+    </div>
+
+    </main><!-- /.container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script> -->
+    <!-- <script src="../../assets/js/vendor/popper.min.js"></script> -->
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <script>
+        window.onload = async (event) => {
+
+            const [_,__,nodeName] = window.location.pathname.split("/");
+
+            fetch(`/node/${nodeName}`,{
+                method: "GET",
+                headers: {
+                "Content-Type": "application/json",
+                }
+            }).then(function(response){
+                $("#wait").remove();
+                const selector = $("#logs-body");
+                response.json().then(data => {
+                    data.forEach(log => {
+                        selector.append(`<tr><td>${log.Key}</td><td>${Math.ceil(log.Size/(1024*1024))}MB</td><td><a target="_blank" href="https://ocr-soak-test.s3.us-west-2.amazonaws.com/${log.Key}" class="button">Download Log &darr;</a></td></tr>`)
+                    });
+                })
+            }).catch(function(error){
+                alert('Error Occurred: ', error?.code)
+            })
+        }
+    </script>
+  </body>
+</html>
