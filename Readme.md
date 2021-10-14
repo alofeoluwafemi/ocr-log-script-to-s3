@@ -16,7 +16,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#c
 
 ### Set ACL to Match the below
 
-![ACL Bucket Settings](s3://drewhyte-west-1/acl.png)
+![ACL Bucket Settings](https://drewhyte-west-1.s3.us-west-1.amazonaws.com/acl.png)
 
 ### Attach this policy
 
@@ -45,7 +45,6 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#c
 # !! REMEMBER TO CHANGE BUCKET URL TO MATCHING URL
 0 */2 * * * ~/ocr-s3.sh >~/ocr-s3-output.log 2>&1
 ```
-
 
 ### Edit `app.js` of the nodejs script that list the logs
 
