@@ -36,7 +36,7 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#c
 }
 ```
 
-### Copy the 2 Bash scripts in the soak-manual directory to your machine home directory & update your crontab with the following commnads
+### Copy the 2 Bash scripts in the [soak-manual](https://github.com/slim12kg/ocr-log-script-to-s3/tree/master/soak-manual) directory to your machine home directory & update your crontab with the following commnads
 
 ```
 # Runs every hour
