@@ -22,20 +22,21 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#c
 
 ```
 {
-  "Version":"2012-10-17",
-  "Statement":[
-    {
-      "Sid":"PublicRead",
-      "Effect":"Allow",
-      "Principal": "*",
-      "Action":["s3:GetObject","s3:GetObjectVersion"],
-      "Resource":["arn:aws:s3:::<BUCKET_NAME>/*"]
-    }
-  ]
+    "Version": "2012-10-17",
+    "Id": "Policy1634203649401",
+    "Statement": [
+        {
+            "Sid": "Stmt1634203628199",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:*",
+            "Resource": "arn:aws:s3:::{BUCKET_NAME_HERE}"
+        }
+    ]
 }
 ```
 
-### Copy the Bash scirpt to your home directory & update your crontab with the following commnads
+### Copy the 2 Bash scripts in the soak-manual directory to your machine home directory & update your crontab with the following commnads
 
 ```
 # Runs every hour
@@ -46,6 +47,17 @@ https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#c
 0 */2 * * * ~/ocr-s3.sh >~/ocr-s3-output.log 2>&1
 ```
 
-### Edit `app.js` of the nodejs script that list the logs
+// Todo Automate this process
+### Edit `nodes.js` and update the list the logs to match the name of the chainlink nodes. Add or remove as appropriate
 
-### Host the nodejs script on Heroku
+// Todo Automate this process
+### Edit `log.js` and replace `BASE_URL`
+
+// Todo Automate this process
+### Edit `app.js` and replace `BUCKETNAME`
+
+// Todo Automate this process
+### Edit `app.js` and replace `BUCKET_REGION` if its not hosted on us-west2
+
+### Host the nodejs script on Heroku (Its Free for 5 Apps)
+Learn How Here: https://devcenter.heroku.com/articles/deploying-nodejs
